@@ -1,0 +1,73 @@
+.sign-up-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.sign-up-form{
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+lable{
+    display: block;
+    margin-bottom: 8px; 
+}
+
+input{
+    width:100%;
+    padding:8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+button{
+    margin-top: 15px;
+    width: 100%;
+    padding:10px;
+    background-color: #3498db;
+    color: #fff;
+    border:none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #2980b9;
+    /* cursor: pointer; */
+}
+
+.Home-Main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center; 
+}
+
+.technique-cards {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 10px;
+    width: calc(70% + 10px); /* Add extra space to account for gap */
+}
+  
+.technique-card {
+    flex: 0 0 calc(33.33% - 10px);
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.sign-out-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999; /* Ensure it's above other content */
+  }
+
