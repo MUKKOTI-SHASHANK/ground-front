@@ -12,12 +12,12 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const Home = () => {
   const navigate = useNavigate();
-  Axios.defaults.withCredentials = true;  
+  Axios.defaults.withCredentials = true;
   useEffect(() => {
     Axios.get("https://ground-improvement-backend.onrender.com/auth/verify").then((res) => {
-      console.log("res", res);
+      // console.log("res", res);
       if (res.data.status) {
-        console.log("res.body", res.body);
+        // console.log("res.body", res.body);
       } else {
         navigate("/login");
       }
@@ -35,7 +35,7 @@ const Home = () => {
       params: { grainSize, area },
     })
       .then((response) => {
-        console.log("res classify", response);
+        // console.log("res classify", response);
         const data = response.data;
         if (Array.isArray(data.commonTechniques)) {
           setCommonTechniques(data.commonTechniques);
