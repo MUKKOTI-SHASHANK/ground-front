@@ -31,7 +31,7 @@ const Signup = () => {
       .catch((err) => {
         console.error(err);
       });
-    e.target.reset();
+    // e.target.reset();
   };
 
   return (

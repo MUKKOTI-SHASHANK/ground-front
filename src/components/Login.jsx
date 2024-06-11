@@ -8,7 +8,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  Axios.defaults.withCredentials = true
+  Axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
     e.preventDefault();
     Axios.post("https://ground-improvement-backend.onrender.com/auth/login", {
@@ -24,7 +24,7 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
       });
-      e.target.reset();
+    // e.target.reset();
   };
 
   return (
