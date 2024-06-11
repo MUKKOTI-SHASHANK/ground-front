@@ -12,7 +12,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const Home = () => {
   const navigate = useNavigate();
-  Axios.defaults.withCredentials = true;
+  Axios.defaults.withCredentials = true;  
   useEffect(() => {
     Axios.get("https://ground-improvement-backend.onrender.com/auth/verify").then((res) => {
       console.log("res", res);
