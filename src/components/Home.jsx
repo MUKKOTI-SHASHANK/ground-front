@@ -52,6 +52,17 @@ const Home = () => {
 
   //   return <div>Home</div>;
 
+  useEffect(() => {
+    // Clear session storage on page refresh
+    const clearStorage = () => {
+      sessionStorage.clear();
+    };
+    window.addEventListener("beforeunload", clearStorage);
+    return () => {
+      window.removeEventListener("beforeunload", clearStorage);
+    };
+  }, []);
+
   const classifyMaterials = () => {
     Axios.get(`https://ground-improvement-backend.onrender.com/auth/classify`, {
       params: { grainSize, area },
@@ -72,6 +83,7 @@ const Home = () => {
     Axios.get("https://ground-improvement-backend.onrender.com/auth/signout")
       .then(() => {
         sessionStorage.clear();
+        console.log("Session storage cleared");
         navigate("/login");
       })
       .catch((err) => {
@@ -125,7 +137,7 @@ const Home = () => {
             <Card
               key={index}
               className="technique-card"
-              // onClick={() => navigate(`/techniques/${technique}`)}
+              onClick={() => navigate(`/techniques/${technique}`)}
               style={{ cursor: "pointer" }}
             >
               <CardContent>
