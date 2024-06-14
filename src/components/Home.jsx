@@ -13,8 +13,22 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 const Home = () => {
   const navigate = useNavigate();
   Axios.defaults.withCredentials = true;
+
+  const getInitialState = (key, defaultValue) => {
+    const saved = sessionStorage.getItem(key);
+    return saved ? JSON.parse(saved) : defaultValue;
+  };
+
+  const [grainSize, setGrainSize] = useState(getInitialState("grainSize", ""));
+  const [area, setArea] = useState(getInitialState("area", ""));
+  const [commonTechniques, setCommonTechniques] = useState(
+    getInitialState("commonTechniques", [])
+  );
+
   useEffect(() => {
-    Axios.get("https://ground-improvement-backend.onrender.com/auth/verify").then((res) => {
+    Axios.get(
+      "https://ground-improvement-backend.onrender.com/auth/verify"
+    ).then((res) => {
       // console.log("res", res);
       if (res.data.status) {
         // console.log("res.body", res.body);
@@ -24,9 +38,17 @@ const Home = () => {
     });
   }, [navigate]);
 
-  const [grainSize, setGrainSize] = useState(0);
-  const [area, setArea] = useState(0);
-  const [commonTechniques, setCommonTechniques] = useState([]);
+  useEffect(() => {
+    // Save state to sessionStorage when component unmounts
+    return () => {
+      sessionStorage.setItem("grainSize", JSON.stringify(grainSize));
+      sessionStorage.setItem("area", JSON.stringify(area));
+      sessionStorage.setItem(
+        "commonTechniques",
+        JSON.stringify(commonTechniques)
+      );
+    };
+  }, [grainSize, area, commonTechniques]);
 
   //   return <div>Home</div>;
 
@@ -49,6 +71,7 @@ const Home = () => {
   const handleSignOut = () => {
     Axios.get("https://ground-improvement-backend.onrender.com/auth/signout")
       .then(() => {
+        sessionStorage.clear();
         navigate("/login");
       })
       .catch((err) => {
@@ -99,7 +122,12 @@ const Home = () => {
       <div className="technique-cards">
         {commonTechniques ? (
           commonTechniques.map((technique, index) => (
-            <Card key={index} className="technique-card">
+            <Card
+              key={index}
+              className="technique-card"
+              // onClick={() => navigate(`/techniques/${technique}`)}
+              style={{ cursor: "pointer" }}
+            >
               <CardContent>
                 <Typography variant="body1" component="p">
                   {technique}
@@ -112,7 +140,7 @@ const Home = () => {
         )}
       </div>
       <div className="sign-out-button">
-        <IconButton onClick={handleSignOut}>
+        <IconButton onClick={handleSignOut} title="Log-Out">
           <ExitToAppIcon />
         </IconButton>
       </div>
