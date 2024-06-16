@@ -39,21 +39,17 @@ const Home = () => {
   }, [navigate]);
 
   useEffect(() => {
-    // Save state to sessionStorage when component unmounts
-    return () => {
-      sessionStorage.setItem("grainSize", JSON.stringify(grainSize));
-      sessionStorage.setItem("area", JSON.stringify(area));
-      sessionStorage.setItem(
-        "commonTechniques",
-        JSON.stringify(commonTechniques)
-      );
-    };
+    // return () => {
+    sessionStorage.setItem("grainSize", JSON.stringify(grainSize));
+    sessionStorage.setItem("area", JSON.stringify(area));
+    sessionStorage.setItem(
+      "commonTechniques",
+      JSON.stringify(commonTechniques)
+    );
+    // };
   }, [grainSize, area, commonTechniques]);
 
-  //   return <div>Home</div>;
-
   useEffect(() => {
-    // Clear session storage on page refresh
     const clearStorage = () => {
       sessionStorage.clear();
     };
@@ -83,7 +79,6 @@ const Home = () => {
     Axios.get("https://ground-improvement-backend.onrender.com/auth/signout")
       .then(() => {
         sessionStorage.clear();
-        console.log("Session storage cleared");
         navigate("/login");
       })
       .catch((err) => {
