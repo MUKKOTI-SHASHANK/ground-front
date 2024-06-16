@@ -17,7 +17,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(email, password, username);
-    Axios.post("https://ground-improvement-backend.onrender.com/auth/signup", {
+    Axios.post("https://ground-backend.onrender.com/auth/signup", {
       username,
       email,
       password,

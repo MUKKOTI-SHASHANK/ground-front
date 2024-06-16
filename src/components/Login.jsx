@@ -11,7 +11,7 @@ const Login = () => {
   Axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post("https://ground-improvement-backend.onrender.com/auth/login", {
+    Axios.post("https://ground-backend.onrender.com/auth/login", {
       email,
       password,
     })

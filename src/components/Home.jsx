@@ -27,7 +27,7 @@ const Home = () => {
 
   useEffect(() => {
     Axios.get(
-      "https://ground-improvement-backend.onrender.com/auth/verify"
+      "https://ground-backend.onrender.com/auth/verify"
     ).then((res) => {
       // console.log("res", res);
       if (res.data.status) {
@@ -39,7 +39,7 @@ const Home = () => {
   }, [navigate]);
 
   useEffect(() => {
-    // return () => {
+    // return () => {x
     sessionStorage.setItem("grainSize", JSON.stringify(grainSize));
     sessionStorage.setItem("area", JSON.stringify(area));
     sessionStorage.setItem(
@@ -60,7 +60,7 @@ const Home = () => {
   }, []);
 
   const classifyMaterials = () => {
-    Axios.get(`https://ground-improvement-backend.onrender.com/auth/classify`, {
+    Axios.get(`https://ground-backend.onrender.com/auth/classify`, {
       params: { grainSize, area },
     })
       .then((response) => {
@@ -76,7 +76,7 @@ const Home = () => {
   };
 
   const handleSignOut = () => {
-    Axios.get("https://ground-improvement-backend.onrender.com/auth/signout")
+    Axios.get("https://ground-backend.onrender.com/auth/signout")
       .then(() => {
         sessionStorage.clear();
         navigate("/login");
