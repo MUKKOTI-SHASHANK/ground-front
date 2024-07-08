@@ -26,9 +26,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    Axios.get(
-      "https://ground-backend.onrender.com/auth/verify"
-    ).then((res) => {
+    Axios.get("https://ground-backend.onrender.com/auth/verify").then((res) => {
       // console.log("res", res);
       if (res.data.status) {
         // console.log("res.body", res.body);
@@ -85,6 +83,12 @@ const Home = () => {
         console.log("signout error", err);
       });
   };
+
+  const handleCardClick = (technique) => {
+    const encodedTechnique = technique.replace(/\s+/g, '');
+    navigate(`/techniques/${encodedTechnique}`);
+  };
+
   return (
     <div className="Home-Main">
       <h1>Ground Improvement Techniques</h1>
@@ -132,7 +136,7 @@ const Home = () => {
             <Card
               key={index}
               className="technique-card"
-              onClick={() => navigate(`/techniques/${technique}`)}
+              onClick={() => handleCardClick(technique)}
               style={{ cursor: "pointer" }}
             >
               <CardContent>

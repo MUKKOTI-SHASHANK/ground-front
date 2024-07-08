@@ -71,3 +71,51 @@ button:hover{
     z-index: 999; /* Ensure it's above other content */
   }
 
+
+
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  
+  .row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 2rem;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .hidden {
+    opacity: 0;
+  }
+  
+  .column {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .description {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  .column{
+    display: flex;
+    flex-direction: column;
+  }
+  .unorderlist1{
+    align-self: baseline;
+  }
+  
