@@ -26,15 +26,25 @@ const Home = () => {
   );
 
   useEffect(() => {
-    Axios.get("https://ground-backend.onrender.com/auth/verify").then((res) => {
-      // console.log("res", res);
-      if (res.data.status) {
-        // console.log("res.body", res.body);
-      } else {
-        navigate("/login");
-      }
-    });
+    const token = localStorage.getItem("token"); // Get the token from local storage
+  
+    if (token) {
+      Axios.get("https://ground-backend.onrender.com/auth/verify", {
+        headers: { "x-access-token": token }, // Send token in headers
+      })
+        .then((res) => {
+          if (!res.data.status) {
+            navigate("/login");
+          }
+        })
+        .catch(() => {
+          navigate("/login");
+        });
+    } else {
+      navigate("/login");
+    }
   }, [navigate]);
+  
 
   useEffect(() => {
     // return () => {x
@@ -99,6 +109,7 @@ const Home = () => {
   const handleSignOut = () => {
     Axios.get("https://ground-backend.onrender.com/auth/signout")
       .then(() => {
+        localStorage.removeItem("token"); // Clear token from local storage
         sessionStorage.clear();
         navigate("/login");
       })
