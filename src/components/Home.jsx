@@ -27,9 +27,12 @@ const Home = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token"); // Get the token from local storage
-  
+    console.log("token in frontend Home component : ", token);
+
     if (token) {
+      console.log(token);
       Axios.get("https://ground-backend.onrender.com/auth/verify", {
+      // Axios.get("http://localhost:5050/auth/verify", {
         headers: { "x-access-token": token }, // Send token in headers
       })
         .then((res) => {
@@ -44,7 +47,6 @@ const Home = () => {
       navigate("/login");
     }
   }, [navigate]);
-  
 
   useEffect(() => {
     // return () => {x
@@ -67,7 +69,6 @@ const Home = () => {
     };
   }, []);
 
-
   useEffect(() => {
     const pingInterval = 15 * 60 * 1000; // 15 minutes in milliseconds
 
@@ -80,18 +81,19 @@ const Home = () => {
           console.error("Health check ping failed:", err);
         });
     };
-     // Initial ping
-     pingServer();
+    // Initial ping
+    pingServer();
 
-     // Set interval for periodic pings
-     const intervalId = setInterval(pingServer, pingInterval);
- 
-     // Cleanup interval on component unmount
-     return () => clearInterval(intervalId);
-   }, []);
+    // Set interval for periodic pings
+    const intervalId = setInterval(pingServer, pingInterval);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   const classifyMaterials = () => {
     Axios.get(`https://ground-backend.onrender.com/auth/classify`, {
+      // Axios.get(`http://localhost:5050/auth/classify`, {
       params: { grainSize, area },
     })
       .then((response) => {
@@ -108,6 +110,8 @@ const Home = () => {
 
   const handleSignOut = () => {
     Axios.get("https://ground-backend.onrender.com/auth/signout")
+    // Axios.get("http://localhost:5050/auth/signout")
+    
       .then(() => {
         localStorage.removeItem("token"); // Clear token from local storage
         sessionStorage.clear();
@@ -119,7 +123,7 @@ const Home = () => {
   };
 
   const handleCardClick = (technique) => {
-    const encodedTechnique = technique.replace(/\s+/g, '');
+    const encodedTechnique = technique.replace(/\s+/g, "");
     navigate(`/techniques/${encodedTechnique}`);
   };
 

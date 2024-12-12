@@ -18,6 +18,7 @@ const Signup = () => {
     e.preventDefault();
     // console.log(email, password, username);
     Axios.post("https://ground-backend.onrender.com/auth/signup", {
+    // Axios.post("http://localhost:5050/auth/signup", {
       username,
       email,
       password,

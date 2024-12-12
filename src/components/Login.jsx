@@ -12,14 +12,19 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     Axios.post("https://ground-backend.onrender.com/auth/login", {
+    // Axios.post("http://localhost:5050/auth/login", {
       email,
       password,
     })
       .then((response) => {
-        console.log(response);
+        console.log("response: ", response);
         if (response.data.status) {
+          console.log("reponse.data", response.data);
           localStorage.setItem("token", response.data.token);
+          console.log("in login page", response.data.token);
           navigate("/home");
+        } else {
+          console.log("Token missing in the response.");
         }
       })
       .catch((err) => {
